@@ -2,6 +2,8 @@ use yew::prelude::*;
 
 enum Msg {
     AddOne,
+    MinusOne,
+    Reset,
 }
 
 struct CounterComponent {
@@ -22,6 +24,16 @@ impl Component for CounterComponent {
                 self.count += 1;
                 true
             }
+
+            Msg::MinusOne => {
+                self.count -= 1;
+                true
+            }
+
+            Msg::Reset => {
+                self.count = 0;
+                true
+            }
         }
     }
 
@@ -31,6 +43,8 @@ impl Component for CounterComponent {
             <div class="container">
                 <p>{ self.count }</p>
                 <button onclick={link.callback(|_| Msg::AddOne)}> { "+1" }</button>
+                <button onclick={link.callback(|_| Msg::MinusOne)}> { "-1" }</button>
+                <button onclick={link.callback(|_| Msg::Reset)}> { "reset" }</button>
             </div>
         }
     }
